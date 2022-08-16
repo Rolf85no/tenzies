@@ -1,0 +1,141 @@
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #0B2434;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Karla', sans-serif;
+}
+main{
+    border-radius: 5%;
+    border: 2px solid #F5F5F5;
+    background-color: #F5F5F5;
+    max-width: 100%;
+    height: 80vh;
+    margin: 24px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.title{
+    margin: 0 auto;
+    color: #2B283A;
+    font-size: calc(3em + 1vw);
+}
+
+.description{
+    margin: 12px auto;
+    width: 60%;
+    text-align: center;
+    font-weight: 400px;
+    color: #4A4E74;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: calc(.5em + 1vw);
+}
+
+.dieContainer{
+    display: grid;
+   grid-template: auto auto / repeat(3, 1fr);
+    gap: 18px;
+}
+
+.die{
+    width: 48px;
+    height: 48px;
+    box-shadow: 0px 2px 2px 0px #00000026;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2B283A;
+    cursor: pointer;
+    background-color: white;
+}
+
+.die:last-child:nth-child(3n - 2){
+    grid-column-end: 3;
+}
+
+.die--number{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.rollButton, .resetButton{
+    margin: 12px; 
+    width: 150px;
+    height: 50px;
+    font-size: 1.2rem;
+    border: none;
+    color: white;
+    background-color: #5035FF;
+    border-radius: 4px;
+    box-shadow: 0px 3.2px 7.68px 0px #0000002E;
+    cursor: pointer;
+    font-family: 'Karla', sans-serif;
+}
+
+
+.resetButton:active, .rollButton:active{
+    background-color: #59E391;
+    color:#0B2434
+}
+
+.rollButton:active{
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+
+
+.winnerText{
+    font-size: calc(1em + 1vw);
+    color:#d335ff;
+    animation-name: winnerBlink;
+    animation-duration: 0.5s;
+    animation-iteration-count: 3;
+    animation-direction: alternate;
+}
+
+.highscore{
+    font-size: calc(.75em + 1vw);
+    margin: 2px auto;
+    color:  #5035FF;
+}
+
+@keyframes winnerBlink{
+    from{opacity: 1;}
+    to{opacity: 0;}
+}
+
+@media (min-width: 400px) {
+    main{
+        max-width: 90%;
+        height: 80vh;
+    }
+
+    .dieContainer{
+        grid-template: auto auto / repeat(5, 1fr);
+    }
+
+    .die:last-child:nth-child(3n - 2){
+        grid-column-end: 6;
+    }
+    
+}
+
+/* Hvis det er mus eller touchpad */
+@media (hover: hover) and (pointer: fine){
+    .resetButton:hover, .rollButton:hover{
+        background-color: #59E391;
+        color:#0B2434
+    }
+}
+
