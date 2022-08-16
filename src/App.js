@@ -19,7 +19,7 @@ export default function App() {
         const sameValue = dice.every(die => die.value === dice[0].value)
 
         if (sameValue && allHeld) {
-            setTenzies(true)
+            setTenzies(true);
             if (timer > highScore) {
                 document.cookie = `score=${timer}`;
                 setHighScore(timer);
@@ -29,13 +29,13 @@ export default function App() {
 
     React.useEffect(() => {
         const countdown = setInterval(function () {
-            if (timer > 0) setTimer(prevTimer => prevTimer - 1)
+            if (!tenzies && !lost) setTimer(prevTimer => prevTimer - 1)
         }, 1000)
-        return () => clearInterval(countdown)
-    }, [])
+        return () => { clearInterval(countdown) }
+    }, [tenzies, lost])
 
     React.useEffect(() => {
-        if (timer < 0 && !tenzies) setLost(true)
+        if (timer <= 0 && !tenzies) setLost(true)
     }, [timer])
 
     function generateNewDice() {
@@ -77,9 +77,6 @@ export default function App() {
             )
         }))
     }
-
-
-
     const diceElements = dice.map(die =>
         <Die
             value={die.value}
@@ -89,7 +86,6 @@ export default function App() {
             holdDice={() => holdDice(die.id)}
         />
     )
-
     return (
         <main>
             <h1 className='title'>Tenzies</h1>
@@ -108,9 +104,9 @@ export default function App() {
                 </p>
                 :
                 <p className="winnerText"> You got Tenzies </p>}
-            <section className="dieContainer">
+            {!lost && <section className="dieContainer">
                 {diceElements}
-            </section>
+            </section>}
             {tenzies || lost ?
                 <button className="resetButton" onClick={newGame}>New Game</button>
                 :
